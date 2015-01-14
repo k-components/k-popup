@@ -1,0 +1,10 @@
+<index: element="d-popup">
+	{{if show}}
+	<div class="d-p-overlay {{if hiding}}hiding{{/}}" on-keydown="keydown($event)" on-click="hide($event)" data-hide="1">
+		<div class="d-popup" style="top: {{top}}px; left: {{left}}px">
+			<div class="d-popup-inner" as="inner">
+				{{@content}}
+			</div>
+		</div>
+	</div>
+	{{/}}
