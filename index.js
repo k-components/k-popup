@@ -19,7 +19,9 @@
       elId = this.model.get('element');
       if (elId) {
         this.el = document.getElementById(elId);
-        return this.el.addEventListener('click', this.show, false);
+        if (this.el) {
+          return this.el.addEventListener('click', this.show, false);
+        }
       }
     };
 

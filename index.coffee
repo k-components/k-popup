@@ -7,7 +7,8 @@ module.exports = class Popup
 		elId = @model.get('element')
 		if elId
 			@el = document.getElementById elId
-			@el.addEventListener 'click', @show, false
+			if @el
+				@el.addEventListener 'click', @show, false
 
 	show: (e) =>
 		console.log 'show', @el
