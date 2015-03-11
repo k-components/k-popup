@@ -12,7 +12,7 @@
 
     Popup.prototype.view = __dirname;
 
-    Popup.prototype.name = 'd-popup';
+    Popup.prototype.name = 'k-popup';
 
     Popup.prototype.create = function() {
       var elId;

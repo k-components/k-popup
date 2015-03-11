@@ -1,7 +1,7 @@
 
 module.exports = class Popup
 	view: __dirname
-	name: 'd-popup'
+	name: 'k-popup'
 
 	create: ->
 		elId = @model.get('element')

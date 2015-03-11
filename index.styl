@@ -1,4 +1,4 @@
-.d-p-overlay
+.k-p-overlay
   position fixed
   top 0
   left 0
@@ -6,17 +6,18 @@
   bottom 0
   z-index 1000
   background rgba(0,0,0,0.2)
-  animation 0.3s d-p-overlay ease
+  animation 0.3s k-p-overlay ease
+
   &.hiding
-    animation 0.3s d-p-overlay-off ease
+    animation 0.3s k-p-overlay-off ease
     background rgba(0,0,0,0)
 
-  &.hiding .d-popup
-    animation 0.3s d-p-popup-off cubic-bezier(0, 1, 0, 1)
+  &.hiding .k-popup
+    animation 0.3s k-p-popup-off cubic-bezier(0, 1, 0, 1)
     opacity 0
     transform translateY(100px)
 
-  .d-popup:before
+  .k-popup:before
     border-left 8px solid transparent
     border-right 8px solid transparent
     border-bottom 8px solid white
@@ -24,7 +25,7 @@
     top -8px
     left 121px
     content ''
-  .d-popup
+  .k-popup
     position fixed
     background #fafafa
     border-radius 5px
@@ -32,22 +33,22 @@
     width 250px
     height 100px
     background #fff
-    animation 0.3s d-p-popup cubic-bezier(0, 1, 0, 1)
+    animation 0.3s k-p-popup cubic-bezier(0, 1, 0, 1)
     
     p
       margin 0
     
-    .d-popup-inner
+    .k-popup-inner
       padding .5em 1em
       color #555
 
-@keyframes d-p-overlay
+@keyframes k-p-overlay
   0%
     background rgba(0,0,0,0)
   100%
     background rgba(0,0,0,0.2)
 
-@keyframes d-p-popup
+@keyframes k-p-popup
   0%
     opacity 0
     transform translateY(100px)
@@ -56,13 +57,13 @@
     transform translateY(0)
 
 
-@keyframes d-p-overlay-off
+@keyframes k-p-overlay-off
   0%
     background rgba(0,0,0,0.2)
   100%
     background rgba(0,0,0,0)
 
-@keyframes d-p-popup-off
+@keyframes k-p-popup-off
   0%
     opacity 1
     transform translateY(0)
