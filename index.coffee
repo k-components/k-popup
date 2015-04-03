@@ -11,18 +11,21 @@ module.exports = class Popup
 				@el.addEventListener 'click', @show, false
 
 	show: (e) =>
-		console.log 'show', @el
 		if @el and e
 			e.preventDefault()
 			e.stopPropagation()
 			rect = @el.getBoundingClientRect()
-			console.log rect, rect.bottom, (rect.left + (rect.width / 2))
 			@model.set 'top', rect.bottom + 10
-			@model.set 'left', (rect.left + (rect.width / 2)) - 125
+			left = (rect.left + (rect.width / 2)) - 125
+			if left < 0
+				left = 10
+				@model.set 'leftborder', 'leftborder'
+			@model.set 'left', left
 			@model.set 'show', true
 
 	hide: (e) =>
 		h = =>
+			@model.del 'leftborder'
 			@model.del 'show'
 			@model.del 'hiding'
 
