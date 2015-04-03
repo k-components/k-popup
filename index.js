@@ -6,6 +6,8 @@
   module.exports = Popup = (function() {
     function Popup() {
       this.keydown = __bind(this.keydown, this);
+      this.resize = __bind(this.resize, this);
+      this.setPosition = __bind(this.setPosition, this);
       this.hide = __bind(this.hide, this);
       this.show = __bind(this.show, this);
     }
@@ -26,18 +28,11 @@
     };
 
     Popup.prototype.show = function(e) {
-      var left, rect;
       if (this.el && e) {
         e.preventDefault();
         e.stopPropagation();
-        rect = this.el.getBoundingClientRect();
-        this.model.set('top', rect.bottom + 10);
-        left = (rect.left + (rect.width / 2)) - 125;
-        if (left < 0) {
-          left = 10;
-          this.model.set('leftborder', 'leftborder');
-        }
-        this.model.set('left', left);
+        window.addEventListener('resize', this.resize, false);
+        this.setPosition();
         return this.model.set('show', true);
       }
     };
@@ -51,9 +46,28 @@
           return _this.model.del('hiding');
         };
       })(this);
+      window.removeEventListener('resize', this.resize);
       return this.model.set('hiding', true, function() {
         return setTimeout(h, 310);
       });
+    };
+
+    Popup.prototype.setPosition = function() {
+      var left, rect;
+      rect = this.el.getBoundingClientRect();
+      this.model.set('top', rect.bottom + 10);
+      left = (rect.left + (rect.width / 2)) - 125;
+      if (left < 0) {
+        left = 10;
+        this.model.set('leftborder', 'leftborder');
+      } else {
+        this.model.del('leftborder');
+      }
+      return this.model.set('left', left);
+    };
+
+    Popup.prototype.resize = function(e) {
+      return this.setPosition();
     };
 
     Popup.prototype.keydown = function(e) {

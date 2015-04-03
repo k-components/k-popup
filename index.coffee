@@ -14,13 +14,8 @@ module.exports = class Popup
 		if @el and e
 			e.preventDefault()
 			e.stopPropagation()
-			rect = @el.getBoundingClientRect()
-			@model.set 'top', rect.bottom + 10
-			left = (rect.left + (rect.width / 2)) - 125
-			if left < 0
-				left = 10
-				@model.set 'leftborder', 'leftborder'
-			@model.set 'left', left
+			window.addEventListener 'resize', @resize, false
+			@setPosition()
 			@model.set 'show', true
 
 	hide: (e) =>
@@ -29,8 +24,23 @@ module.exports = class Popup
 			@model.del 'show'
 			@model.del 'hiding'
 
+		window.removeEventListener 'resize', @resize
 		@model.set 'hiding', true, ->
 			setTimeout h, 310
+
+	setPosition: =>
+		rect = @el.getBoundingClientRect()
+		@model.set 'top', rect.bottom + 10
+		left = (rect.left + (rect.width / 2)) - 125
+		if left < 0
+			left = 10
+			@model.set 'leftborder', 'leftborder'
+		else
+			@model.del 'leftborder'
+		@model.set 'left', left
+
+	resize: (e) =>
+		@setPosition()
 
 	keydown: (e) =>
 		key = e.keyCode or e.which
