@@ -3,20 +3,26 @@ module.exports = class Popup
 	view: __dirname
 	name: 'k-popup'
 
+	destroy: -> @removeKeydownEvent()
+
 	create: ->
-		elId = @model.get('element')
-		if elId
-			@el = document.getElementById elId
-			if @el
-				@el.addEventListener 'click', @show, false
+		@model.set 'top', 'auto'
+		@model.set 'left', 'auto'
+		element = @model.get('element')
+		@el = if element then document.getElementById(element) else @popup.parentNode
+		if @el
+			@el.addEventListener 'click', @show, false
 
 	show: (e) =>
-		if @el and e
+		if !@model.get('show') and @el and e
 			e.preventDefault()
 			e.stopPropagation()
-			window.addEventListener 'resize', @resize, false
-			@setPosition()
+
+			if @model.get('pos')
+				@setPosition()
+
 			@model.set 'show', true
+			@setKeydownEvent()
 
 	hide: (e) =>
 		h = =>
@@ -24,23 +30,21 @@ module.exports = class Popup
 			@model.del 'show'
 			@model.del 'hiding'
 
-		window.removeEventListener 'resize', @resize
+		@removeKeydownEvent()
 		@model.set 'hiding', true, ->
 			setTimeout h, 310
 
+	setKeydownEvent: =>
+		document.addEventListener 'keydown', @keydown, true
+
+	removeKeydownEvent: =>
+		document.removeEventListener 'keydown', @keydown
+
 	setPosition: =>
 		rect = @el.getBoundingClientRect()
-		@model.set 'top', rect.bottom + 10
-		left = (rect.left + (rect.width / 2)) - 125
-		if left < 0
-			left = 10
-			@model.set 'leftborder', 'leftborder'
-		else
-			@model.del 'leftborder'
-		@model.set 'left', left
-
-	resize: (e) =>
-		@setPosition()
+		@model.set 'top', rect.bottom + 10 + 'px'
+		adjust = if rect.right + 125 > window.innerWidth then rect.right + 125 - window.innerWidth else 0
+		@model.set 'left', (rect.left - adjust) + 'px'
 
 	keydown: (e) =>
 		key = e.keyCode or e.which

@@ -8,48 +8,49 @@
   background rgba(0,0,0,0.2)
   animation 0.3s k-p-overlay ease
 
-  &.hiding
-    animation 0.3s k-p-overlay-off ease
-    background rgba(0,0,0,0)
+.hiding
+  animation 0.3s k-p-overlay-off ease
+  background rgba(0,0,0,0)
 
-  &.hiding .k-popup
-    animation 0.3s k-p-popup-off cubic-bezier(0, 1, 0, 1)
-    opacity 0
-    transform translateY(100px)
+.k-popup.hiding
+  animation 0.3s k-p-popup-off cubic-bezier(0, 1, 0, 1)
+  opacity 0
+  transform translateY(100px)
 
-  .k-popup.leftborder:before
-    left 10px
+.k-popup.leftborder:before
+  left 10px
 
-  .k-popup:before
-    border-left 8px solid transparent
-    border-right 8px solid transparent
-    border-bottom 8px solid white
-    position fixed
-    top -8px
-    left 121px
-    content ''
-    z-index 100009
+.k-popup:before
+  border-left 8px solid transparent
+  border-right 8px solid transparent
+  border-bottom 8px solid white
+  position absolute
+  top -8px
+  left 121px
+  content ''
+  z-index 100009
 
-  .k-popup
-    position fixed
-    background #fafafa
-    border-radius 5px
-    box-shadow 0 0 5px rgba(0,0,0,0.1)
-    width 250px
-    background #fff
-    animation 0.3s k-p-popup cubic-bezier(0, 1, 0, 1)
-    z-index 1000
-    overflow hidden
-    
-    p
-      margin 0
-    
-    .k-popup-inner
-      padding 0
-      color #555
+.k-popup
+  position absolute
+  transform translateX(-50%)
+  background #fafafa
+  border-radius 5px
+  box-shadow 0 0 5px rgba(0,0,0,0.1)
+  width 250px
+  background #fff
+  animation 0.3s k-p-popup cubic-bezier(0, 1, 0, 1)
+  z-index 1000
+  overflow hidden
+  
+  p
+    margin 0
+  
+  .k-popup-inner
+    padding 0
+    color #555
 
-      a
-        padding 10px 15px
+    a
+      padding 10px 15px
 
 @keyframes k-p-overlay
   0%
@@ -60,10 +61,10 @@
 @keyframes k-p-popup
   0%
     opacity 0
-    transform translateY(100px)
+    transform translateY(100px) translateX(-50%)
   100%
     opacity 1
-    transform translateY(0)
+    transform translateY(0) translateX(-50%)
 
 
 @keyframes k-p-overlay-off
@@ -75,7 +76,7 @@
 @keyframes k-p-popup-off
   0%
     opacity 1
-    transform translateY(0)
+    transform translateY(0) translateX(-50%)
   100%
     opacity 0
-    transform translateY(100px)
+    transform translateY(100px) translateX(-50%)

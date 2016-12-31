@@ -1,10 +1,10 @@
 <index: element="k-popup">
+	<span as="popup"></span>
 	{{if show}}
-	<div class="k-p-overlay {{if hiding}}hiding{{/}}" on-keydown="keydown($event)" on-click="hide($event)" data-hide="1">
-		<div class="k-popup {{leftborder}}" style="top: {{top}}px; left: {{left}}px">
-			<div class="k-popup-inner" as="inner">
-				{{@content}}
-			</div>
+	<div class="k-p-overlay {{if hiding}}hiding{{/}}" on-click="hide($event)"></div>
+	<div class="k-popup {{leftborder}} {{if hiding}}hiding{{/}} {{if fixed}}fixed{{/}}" on-click="hide($event)" style="top: {{top}}; left: {{left}}">
+		<div class="k-popup-inner" as="inner">
+			{{@content}}
 		</div>
 	</div>
 	{{/}}
