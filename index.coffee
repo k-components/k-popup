@@ -26,7 +26,6 @@ module.exports = class Popup
 
 	hide: (e) =>
 		h = =>
-			@model.del 'leftborder'
 			@model.del 'show'
 			@model.del 'hiding'
 

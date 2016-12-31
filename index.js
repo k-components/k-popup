@@ -48,7 +48,6 @@
       var h;
       h = (function(_this) {
         return function() {
-          _this.model.del('leftborder');
           _this.model.del('show');
           return _this.model.del('hiding');
         };
