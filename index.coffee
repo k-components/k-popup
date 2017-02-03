@@ -1,3 +1,4 @@
+# note: we could just use translate to position the popup, but iOS has a bug in it.
 
 module.exports = class Popup
 	view: __dirname
@@ -7,19 +8,23 @@ module.exports = class Popup
 
 	create: ->
 		@model.set 'top', 'auto'
-		@model.set 'left', 'auto'
+		@model.set 'right', 'auto'
+		@model.set 'marginleft', '0'
+
 		element = @model.get('element')
 		@el = if element then document.getElementById(element) else @popup.parentNode
 		if @el
 			@el.addEventListener 'click', @show, false
-
+     
 	show: (e) =>
 		if !@model.get('show') and @el and e
 			e.preventDefault()
 			e.stopPropagation()
 
-			if @model.get('pos')
-				@setPosition()
+			if @model.get('absolute')
+				@setPositionAbsolute()
+			else
+				@setPositionRelative()
 
 			@model.set 'show', true
 			@setKeydownEvent()
@@ -39,11 +44,16 @@ module.exports = class Popup
 	removeKeydownEvent: =>
 		document.removeEventListener 'keydown', @keydown
 
-	setPosition: =>
+	setPositionAbsolute: =>
 		rect = @el.getBoundingClientRect()
 		@model.set 'top', rect.bottom + 10 + 'px'
-		adjust = if rect.right + 125 > window.innerWidth then rect.right + 125 - window.innerWidth else 0
-		@model.set 'left', (rect.left - adjust) + 'px'
+		right = if rect.right + 125 > window.innerWidth then 10 else window.innerWidth - rect.right - 125
+		@model.set 'right', right + 'px'
+
+	setPositionRelative: =>
+		rect = @el.getBoundingClientRect()
+		marginleft = if rect.right + 125 > window.innerWidth then -125 - (rect.right + 125 - window.innerWidth) - 10 else -125
+		@model.set 'marginleft', marginleft + 'px'
 
 	keydown: (e) =>
 		key = e.keyCode or e.which
