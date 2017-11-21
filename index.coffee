@@ -4,7 +4,7 @@ module.exports = class Popup
 	view: __dirname
 	name: 'k-popup'
 
-	destroy: -> @removeKeydownEvent()
+	destroy: ->	@removeKeydownEvent()
 
 	create: ->
 		@model.set 'top', 'auto'
@@ -42,7 +42,7 @@ module.exports = class Popup
 		document.addEventListener 'keydown', @keydown, true
 
 	removeKeydownEvent: =>
-		document.removeEventListener 'keydown', @keydown
+		document.removeEventListener 'keydown', @keydown, true
 
 	setPositionAbsolute: =>
 		rect = @el.getBoundingClientRect()
@@ -57,4 +57,6 @@ module.exports = class Popup
 
 	keydown: (e) =>
 		key = e.keyCode or e.which
-		@hide() if key is 27
+		if key is 27
+			e.stopPropagation()
+			@hide()
