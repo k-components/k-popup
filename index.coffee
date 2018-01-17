@@ -52,7 +52,7 @@ module.exports = class Popup
 
 	setPositionRelative: =>
 		rect = @el.getBoundingClientRect()
-		marginleft = if rect.right + 125 > window.innerWidth then -125 - (rect.right + 125 - window.innerWidth) - 10 else -125
+		marginleft = if rect.right + 125 > window.innerWidth then (-125 - (rect.right + 125 - window.innerWidth) - 10) else (-125 + @el.offsetWidth / 2)
 		@model.set 'marginleft', marginleft + 'px'
 
 	keydown: (e) =>
