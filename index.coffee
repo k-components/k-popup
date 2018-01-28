@@ -4,7 +4,10 @@ module.exports = class Popup
 	view: __dirname
 	name: 'k-popup'
 
-	destroy: ->	@removeKeydownEvent()
+	destroy: ->
+		@removeKeydownEvent()
+		if @el
+			@el.removeEventListener 'click', @show, false
 
 	create: ->
 		@model.set 'top', 'auto'
