@@ -33,6 +33,7 @@ module.exports = class Popup
 		h = =>
 			@model.del 'show'
 			@model.del 'hiding'
+			@emit 'hide'
 
 		@removeKeydownEvent()
 		@model.set 'hiding', true, ->
