@@ -27,6 +27,7 @@ module.exports = class Popup
 				@setPositionRelative()
 
 			@model.set 'show', true
+			@emit 'show'
 			@setKeydownEvent()
 
 	hide: (e) =>
