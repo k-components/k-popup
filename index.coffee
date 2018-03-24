@@ -49,16 +49,23 @@ module.exports = class Popup
 	removeKeydownEvent: =>
 		document.removeEventListener 'keydown', @keydown, true
 
+	setBottom: (rect) =>
+		if rect.bottom + 200 > window.innerHeight
+			@model.set 'above', 1
+
 	setPositionAbsolute: =>
 		rect = @el.getBoundingClientRect()
+		console.log rect
 		@model.set 'top', rect.bottom + 10 + 'px'
 		right = if rect.right + 125 > window.innerWidth then 10 else window.innerWidth - rect.right - 125
 		@model.set 'right', right + 'px'
 
 	setPositionRelative: =>
 		rect = @el.getBoundingClientRect()
+		console.log rect
 		marginleft = if rect.right + 125 > window.innerWidth then (-125 - (rect.right + 125 - window.innerWidth) - 10) else (-125 + @el.offsetWidth / 2)
 		@model.set 'marginleft', marginleft + 'px'
+		@setBottom(rect)
 
 	keydown: (e) =>
 		key = e.keyCode or e.which

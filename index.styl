@@ -5,7 +5,7 @@
   right 0
   bottom 0
   z-index 1000
-  background rgba(0,0,0,0.15)
+  background rgba(0,0,0,0.07)
   animation 0.3s k-p-overlay ease
 
 .hiding
@@ -20,29 +20,48 @@
 .k-popup.leftborder:before
   left 10px
 
+.k-popup.k-popup-above:before
+  top unset
+  bottom -24px
+  border-top 8px solid #fff
+  border-bottom unset
+
+
 .k-popup:before
   border-left 8px solid transparent
   border-right 8px solid transparent
-  border-bottom 8px solid white
+  border-bottom 8px solid #fff
   position absolute
-  top -8px
-  left 121px
-  content ''
-  z-index 100009
+  top -24px
+  left 115px
+  content '.'
+
+.k-popup.k-popup-above
+  bottom 22px
+  animation 0.3s k-p-popup-above cubic-bezier(0, 1, 0, 1)
 
 .k-popup
+  font-size 0.8rem
   text-align left
   position absolute
   transform translate(0, 0)  
   background #fafafa
-  border-radius 5px
-  box-shadow 0 0 5px rgba(0,0,0,0.1)
+  border-radius 7px
+  box-shadow 0 0 10px rgba(0,0,0,0.15)
   width 250px
   background #fff
   animation 0.3s k-p-popup cubic-bezier(0, 1, 0, 1)
   z-index 10000
-  overflow hidden
-  
+  margin-top 10px
+
+  .k-popup-arrow
+    position absolute
+    width 0
+    height 0
+    left 50%
+    border-width 0 7px 5px
+    border-bottom-color #d9e1e8  
+
   p
     margin 0
   
@@ -52,24 +71,34 @@
     max-height: 500px;
     overflow-y: auto;
     overflow-x: hidden;
+    border-radius 7px
+    overflow hidden
 
 @keyframes k-p-overlay
   0%
     background rgba(0,0,0,0)
   100%
-    background rgba(0,0,0,0.15)
+    background rgba(0,0,0,0.07)
 
 @keyframes k-p-popup
   0%
     opacity 0
-    transform translate(0, 100px)
+    transform translate(0, -100px) scale(0.4)
   100%
     opacity 1
-    transform translate(0, 0) 
+    transform translate(0, 0) scale(1)
+
+@keyframes k-p-popup-above
+  0%
+    opacity 0
+    transform translate(0, 100px) scale(0.4)
+  100%
+    opacity 1
+    transform translate(0, 0) scale(1)
 
 @keyframes k-p-overlay-off
   0%
-    background rgba(0,0,0,0.15)
+    background rgba(0,0,0,0.07)
   100%
     background rgba(0,0,0,0)
 
