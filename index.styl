@@ -70,11 +70,17 @@
   .k-popup-inner
     padding 0
     color #555
-    max-height: 500px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    max-height 500px
     border-radius 7px
-    overflow hidden
+    overflow-y auto
+    overflow-x hidden
+    
+    &::-webkit-scrollbar
+      width: 7px
+
+    &::-webkit-scrollbar-thumb
+      background #ddd
+      border-radius 5px    
 
 @keyframes k-p-overlay
   0%
