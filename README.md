@@ -1,4 +1,4 @@
-k-popup
+k-popup for Kantele framework
 ========
 
 Small popups attached to a "parent node" (will show underneath it).
