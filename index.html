@@ -2,7 +2,7 @@
 	<span as="popup"></span>
 	{{if show}}
 	<div class="k-p-overlay {{if hiding}}hiding{{/}}" on-click="hide($event)"></div>
-	<div class="k-popup {{if hiding}}hiding{{/}} {{if fixed}}fixed{{/}} {{if above}}k-popup-above{{/}}" on-click="hide($event)" style="top: {{top}}; right: {{right}}; margin-left: {{marginleft}}">
+	<div class="k-popup {{if hiding}}hiding{{/}} {{if fixed}}fixed{{/}} {{if above}}k-popup-above{{/}}" on-click="hide($event)" style="top: {{top}}; left: {{left}}; margin-left: {{marginleft}}">
 		<div class="k-popup-inner" as="inner">
 			{{@content}}
 		</div>

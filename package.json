@@ -1,6 +1,6 @@
 {
   "name": "k-popup",
-  "version": "0.3.16",
+  "version": "0.3.17",
   "description": "Derby.js dialog component",
   "main": "index.js",
   "scripts": {

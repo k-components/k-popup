@@ -55,9 +55,13 @@ module.exports = class Popup
 
 	setPositionAbsolute: =>
 		rect = @el.getBoundingClientRect()
+		left = Math.max(10, rect.left - 125 + (rect.width / 2)) + 2
+
+		if window.innerWidth - (left + 250) < 0
+			left += window.innerWidth - (left + 250) - 10
+
+		@model.set 'left', "#{left}px"
 		@model.set 'top', rect.bottom + 10 + 'px'
-		right = if rect.right + 125 > window.innerWidth then 10 else window.outerWidth - rect.right - 125 + (rect.width / 2) - 7
-		@model.set 'right', right + 'px'
 
 	setPositionRelative: =>
 		rect = @el.getBoundingClientRect()
